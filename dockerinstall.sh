@@ -17,7 +17,7 @@
 # Update the `apt` package cache.
     sudo apt-get update
 # Install the required Docker packages.
-    sudo apt-get install docker-ce docker-ce-cli containerd.io
+    sudo apt-get -y install docker-ce docker-ce-cli containerd.io
 # Start and enable the `docker` daemon.
     sudo systemctl enable --now docker
 

@@ -17,7 +17,8 @@ sudo apt-get install -y \
     curl \
     gnupg \
     perl \
-    alacarte \
+    net-tools \
+    mlocate \
     gnupg-agent \
     software-properties-common \
     nano \
@@ -37,8 +38,7 @@ sudo apt autoremove
 echo "                          "
 echo "Creating new... sudoer"
 echo "                          "
-crypt($plain, $salt)
-echo "                          "
+echo " Using perl to help create encrypted password "
 #Using perl to help create encrypted password#
 echo "                          "
 password='#!Tem(P)orarY_P{A}s$w0rD!#'

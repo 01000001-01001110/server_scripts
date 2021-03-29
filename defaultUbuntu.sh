@@ -1,5 +1,6 @@
 #Alan's Default Ubuntu Box Setup
-
+#wget $url https://raw.githubusercontent.com/01000001-01001110/server_scripts/main/defaultUbuntu.sh -O - | sh
+#https://raw.githubusercontent.com/01000001-01001110/server_scripts/main/defaultUbuntu.sh
 echo "Welcome, we are going to start configuring the system."
 echo "                          "
 echo "                          "
@@ -23,9 +24,6 @@ sudo apt-get install -y \
     lsb-release
 echo "                          "
 echo "                          "
-
-chmod +x add-user-script.sh
-
 echo "Upgrade & Update"
 echo "                          "
 echo "                          "
@@ -39,23 +37,24 @@ sudo apt autoremove
 echo "                          "
 echo "Creating new... sudoer"
 echo "                          "
-#Test, am i Root user?
-if [ $(id -u) -eq 0 ]; then
-	read -p "Username : " username
-	read -s -p "Password : " password
-	egrep "^$username" /etc/passwd >/dev/null
+crypt($plain, $salt)
+echo "                          "
+#Using perl to help create encrypted password#
+echo "                          "
+password='#!Tem(P)orarY_P{A}s$w0rD!#'
+pass=$(perl -e 'print crypt($ARGV[0], "password")' $password)
+read -p "Enter the new users usernamee : " username
+echo "                          "
+echo "Check if Username is already setup."
+echo "                          "
+egrep "^$username" /etc/passwd >/dev/null
 	if [ $? -eq 0 ]; then
-		echo "$username already taken!"
+		echo "$username exists!"
 		exit 1
 	else
-		pass=$(perl -e 'print crypt($ARGV[0], "password")' $password)
-		useradd -m -p "$pass" "$username"
-		[ $? -eq 0 ] && echo "User has been added to system!" || echo "Failed to add a user!"
+		echo "$username does not exist! Creating $username"
+useradd -m -p $pass $username
 	fi
-else
-	echo "Only root may add a user to the system."
-	exit 2
-fi 
 echo "                          "
 echo "                          "
 echo "Add $username to sudo."

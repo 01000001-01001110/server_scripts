@@ -36,32 +36,6 @@ echo "                          "
 #remove packages that are no longer needed
 sudo apt autoremove
 echo "                          "
-echo "Creating new... sudoer"
-echo "                          "
-echo " Using perl to help create encrypted password "
-#Using perl to help create encrypted password#
-echo "                          "
-password='#!Tem(P)orarY_P{A}s$w0rD!#'
-pass=$(perl -e 'print crypt($ARGV[0], "password")' $password)
-read -p "Enter the new users usernamee : " username
-echo "                          "
-echo "Check if Username is already setup."
-echo "                          "
-egrep "^$username" /etc/passwd >/dev/null
-	if [ $? -eq 0 ]; then
-		echo "$username exists!"
-		exit 1
-	else
-		echo "$username does not exist! Creating $username"
-useradd -m -p $pass $username
-	fi
-echo "                          "
-echo "                          "
-echo "Add $username to sudo."
-echo "                          "
-sudo adduser $username sudo
-echo "                          "
-echo "                          "
 echo "                          "
 echo "Some security work, first we disable root login."
 echo "                          "

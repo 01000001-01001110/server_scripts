@@ -1,5 +1,5 @@
 #Alan's Default Ubuntu Box Setup
-#wget $url  -O - | sh
+#wget $url https://raw.githubusercontent.com/01000001-01001110/server_scripts/main/oknow.sh -O - | sh
 
 echo "Welcome, we are going to start configuring the system."
 echo "                          "

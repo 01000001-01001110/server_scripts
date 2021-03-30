@@ -64,7 +64,7 @@ incorrect_selection() {
 
 until [ "$selection" = "0" ]; do
   clear
-  echo ""
+  echo "Welcome to Alans Ubuntu Server 20.04 LTS Configuration Script"
   echo "    	1  -  Update, Upgrade, Install Tools"
   echo "    	2  -  Install Docker and Docker Compose"
   echo "    	3  -  Install Portainer"

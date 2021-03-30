@@ -12,4 +12,4 @@ read -p "Container Name : " contname
 read -p "Spawn NPCs, Select either true|false : " npc
 read -p "Server Monsters, Select either true|false : " monster
 read -p "Spawn animals, Select either true|false : " animal
-#docker run -d -it -e EULA=TRUE --name $contname -e SERVER_NAME="$servername" -e GAMEMODE=$gamemode -e ONLINE_MODE=$online -e level_seed=$seed -e difficulty=normal -e spawn-npcs=$npc -e spawn-monsters=$monster -e spawn-animals=$animal  -p 19132:$port/udp itzg/minecraft-bedrock-server --restart always
+docker run -d -it -e EULA=TRUE --name $contname -e SERVER_NAME=$servername -e GAMEMODE=$gamemode -e ONLINE_MODE=$online -e level_seed=$seed -e difficulty=normal -e spawn-npcs=$npc -e spawn-monsters=$monster -e spawn-animals=$animal  -p $port:19132/udp itzg/minecraft-bedrock-server --restart always

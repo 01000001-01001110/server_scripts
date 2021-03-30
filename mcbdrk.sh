@@ -7,6 +7,10 @@ read -p "Server Name : " servername
 read -p "Game Mode, Select either creative|survival : " gamemode
 read -p "Seed : " seed
 read -p "Port : " port
+if ! [[ "$port" =~ "^[0-9]+$" ]]
+        then
+            echo "Sorry integers only"
+fi
 read -p "Require Microsoft Account, Select either true|false : " online
 read -p "Container Name : " contname
 read -p "Spawn NPCs, Select either true|false : " npc

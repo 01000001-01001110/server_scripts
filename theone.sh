@@ -58,13 +58,30 @@ press_enter() {
   clear
 }
 
+menu_leave() {
+  echo ""
+  echo -n "	Cleaning any configuration files that are left over from this install... "
+  find . -name "prom.sh" -exec rm -rf {} \;
+  find . -name "mcj.sh" -exec rm -rf {} \;
+  find . -name "mcbdrk.sh" -exec rm -rf {} \;
+  find . -name "sudoer.sh" -exec rm -rf {} \;
+  find . -name "3.sh" -exec rm -rf {} \;
+  find . -name "2.sh" -exec rm -rf {} \;
+  find . -name "1.sh" -exec rm -rf {} \;
+  find . -name "theone.sh" -exec rm -rf {} \;
+  echo -n " Completed cleanup. You can now exit. "
+  echo -n "	Press Enter to clean up the script and exit this menu. "
+  read
+  clear
+}
+
 incorrect_selection() {
   echo "Incorrect selection! Try again."
 }
 
 until [ "$selection" = "0" ]; do
   clear
-  echo "Welcome to Alans Ubuntu Server 20.04 LTS Configuration Script"
+  echo ""
   echo "    	1  -  Update, Upgrade, Install Tools"
   echo "    	2  -  Install Docker and Docker Compose"
   echo "    	3  -  Install Portainer"
@@ -87,7 +104,7 @@ until [ "$selection" = "0" ]; do
     6 ) clear ; menu_option_six ; press_enter ;;
     7 ) clear ; menu_option_seven ; press_enter ;;
     8 ) clear ; menu_option_eight ; press_enter ;;
-    0 ) clear ; exit ;;
+    0 ) clear ; menu_leave ; exit ;;
     * ) clear ; incorrect_selection ; press_enter ;;
   esac
 done

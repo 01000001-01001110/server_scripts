@@ -1,29 +1,13 @@
-
-
 #!/bin/bash
+#Alan's Default Ubuntu Kubernetes Install
+#Version 0.0.1
+#Date 1/28/2022
+#wget $url https://raw.githubusercontent.com/01000001-01001110/server_scripts/main/kubernetes_install.sh
+#chmod +x kubernetes_install.sh
+#./kubernetes_install.sh
 
-HEIGHT=15
-WIDTH=40
-CHOICE_HEIGHT=4
-BACKTITLE="Backtitle here"
-TITLE="Title here"
-MENU="Choose one of the following options:"
-
-OPTIONS=(1 "Install Kubernetes Master"
-         2 "Install Kubernetes Worker")
-
-CHOICE=$(dialog --clear \
-                --backtitle "$BACKTITLE" \
-                --title "$TITLE" \
-                --menu "$MENU" \
-                $HEIGHT $WIDTH $CHOICE_HEIGHT \
-                "${OPTIONS[@]}" \
-                2>&1 >/dev/tty)
-
-clear
-case $CHOICE in
-        1)
-                        #Update
+menu_option_one() {
+#Update
             sudo apt-get update
 
             #Install some applications to make life easier
@@ -76,8 +60,9 @@ case $CHOICE in
             --privileged \
             rancher/rancher:latest
             echo " Installation Completed."
-            ;;
-        2)
+}
+
+menu_option_two() {
             #Update
             sudo apt-get update
 
@@ -101,5 +86,42 @@ case $CHOICE in
             #Install k3s 
             wget -O - https://get.k3s.io/ | bash
             echo " Installation Completed."
-            ;;
-esac
+}
+
+
+press_enter() {
+  echo ""
+  echo -n "	Press Enter to continue "
+  read
+  clear
+}
+
+menu_leave() {
+  echo ""
+  echo -n "	Cleaning any configuration files that are left over from this install... "
+  find . -name "kubernetes_install.sh" -exec rm -rf {} \;
+  read
+  clear
+}
+
+incorrect_selection() {
+  echo "Incorrect selection! Try again."
+}
+
+until [ "$selection" = "0" ]; do
+  clear
+  echo ""
+  echo "    	1  -  Setup and Install Rancher Master"
+  echo "    	2  -  Setup and Install K3s Client"
+  echo "    	0  -  Exit"
+  echo ""
+  echo -n "  Enter selection: "
+  read selection
+  echo ""
+  case $selection in
+    1 ) clear ; menu_option_one ; press_enter ;;
+    2 ) clear ; menu_option_two ; press_enter ;;
+    0 ) clear ; menu_leave ; exit ;;
+    * ) clear ; incorrect_selection ; press_enter ;;
+  esac
+done

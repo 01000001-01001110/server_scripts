@@ -12,7 +12,6 @@ sudo apt-get install -y \
     curl \
     perl \
     apt-transport-https \
-    
     net-tools \
     fail2ban \
     sysstat \

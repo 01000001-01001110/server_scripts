@@ -9,18 +9,24 @@ echo "Get some applications."
 echo "                          "
 echo "                          "
 sudo apt-get install -y \
-    apt-transport-https \
-    ca-certificates \
     curl \
-    gnupg \
     perl \
+    apt-transport-https \
+    
     net-tools \
-    mlocate \
-    gnupg-agent \
     fail2ban \
-    software-properties-common \
+    sysstat \
+    vnstat \
+    iotop \
+    iftop \
+    bwm-ng \
+    htop \
+    munin \
+    rkhunter \
+    chkrootkit \
     nano \
-    lsb-release
+    lsb-release \ 
+    webmin
 echo "                          "
 echo "                          "
 echo "Upgrade & Update"
@@ -29,7 +35,11 @@ echo "                          "
 #Upgrade & Update 
 sudo apt update && sudo apt upgrade -y
 echo "                          "
+rkhunter --update
+rkhunter --propupd
 echo "Remove packages that are no longer needed"
 echo "                          "
 #remove packages that are no longer needed
 sudo apt autoremove
+echo "Checking for Rootkits"
+rkhunter --check

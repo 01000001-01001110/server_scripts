@@ -25,7 +25,6 @@ sudo apt-get install -y \
     chkrootkit \
     nano \
     lsb-release \ 
-    webmin
 echo "                          "
 echo "                          "
 echo "Upgrade & Update"

@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Update and upgrade packages
+echo "Update and upgrade packages"
+sudo apt-get update && sudo apt-get upgrade -y
+echo "Completed Updates and upgrades of packages"
+
 # Download Docker Compose
 echo "Download Docker Compose"
 sudo curl -L 'https://github.com/docker/compose/releases/download/1.28.5/docker-compose-$(uname -s)-$(uname -m)' -o /usr/local/bin/docker-compose
